@@ -70,7 +70,7 @@ namespace ft {
 	};
 
 	template<typename _Iterator>
-	bool operator==(const reverse_iterator<_Iterator>& lhs, const reverse_iterator<_Iterator>& rhs) { return lhs.base() == lhs.base(); }
+	bool operator==(const reverse_iterator<_Iterator>& lhs, const reverse_iterator<_Iterator>& rhs) { return lhs.base() == rhs.base(); }
 
 	template<typename _Iterator>
 	bool operator<(const reverse_iterator<_Iterator>& lhs, const reverse_iterator<_Iterator>& rhs) { return rhs.base() < lhs.base(); }

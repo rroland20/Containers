@@ -60,9 +60,8 @@ namespace ft
 
 		vector	&operator=(const vector& other) {
 			if (this != &other) {
-				_alloc = other._alloc;
 				_data_destroy();
-				// _start = 
+				insert(begin(), other.begin(), other.end()); 
 			}
 			return *this;
 		}
@@ -220,6 +219,31 @@ namespace ft
 			_insert(pos, first, last, integral());
 		}
 
+		iterator erase(iterator pos) { return erase(pos, pos + 1); }
+
+		iterator erase(iterator first, iterator last) {
+			size_type len = ft::iterLen(first, last);
+			size_type begin_er = ft::iterLen(_start, &(*first));
+			if (!len)
+				return last;
+			if (last == end()) {
+				size_type s = end() - first;
+				_finish -= s;
+				return end();
+			}
+			else {
+				pointer beg_er = &(*first);
+				pointer end_er = &(*last);
+				for (; end_er != _finish; ++end_er, ++beg_er)
+					_alloc.construct(beg_er, *end_er);
+				pointer new_end = beg_er;
+				for (; beg_er != _finish; ++beg_er)
+					_alloc.destroy(beg_er);
+				_finish = new_end;
+				return iterator(_start + begin_er);
+			}
+		}
+
 		void push_back(const value_type& value) {
 			if (size() == capacity()) {
 				size_type new_cap;
@@ -239,8 +263,35 @@ namespace ft
 		}
 
 		void resize(size_type count, value_type value = value_type()) {
-			// if (count > size())
+			if (count > max_size())
+				throw std::length_error("vector::resize ");
+			if (count > size())
+				insert(end(), count - size(), value);
+			else if (count < size()) {
+				for (; size() > count;) {
+					--_finish;
+					_alloc.destroy(_finish);
+				}
+			}
 		}
+
+		void swap( vector& other ) {
+			if (this == &other)
+				return ;
+			alloc_type	tmp_alloc = other._alloc;
+			pointer		tmp_start = other._start;
+			pointer		tmp_finish = other._finish;
+			pointer		tmp_end_of_s = other._end_of_storage;
+			other._alloc = _alloc;
+			other._start = _start;
+			other._finish = _finish;
+			other._end_of_storage = _end_of_storage;
+			_alloc = tmp_alloc;
+			_start = tmp_start;
+			_finish = tmp_finish;
+			_end_of_storage = tmp_end_of_s;
+		}
+
 	private:
 		void _insert(iterator pos, size_type count, const value_type& value, ft::true_type) {
 			if (!count)

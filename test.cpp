@@ -90,11 +90,6 @@ int main() {
 		ft::vector<char> characters;
 		characters.push_back('s');
 		characters.push_back('s');
-		// characters.push_back('s');
-		// characters.push_back('s');
-		// characters.push_back('s');
-		// characters.push_back('s');
-		// characters.push_back('s');
 	
 		characters.assign(5, 'a');
 		print_vector(characters);
@@ -168,9 +163,9 @@ int main() {
 		print_vector(vec);
 		std::cout << "-\n";
 	
-		// std::cout << c1.capacity() << " - " << vec.capacity() << " " << vec.size() << std::endl;
+		std::cout << c1.capacity() << " - " << vec.capacity() << " " << vec.size() << std::endl;
 		c1.insert(it, 2, 300); //2
-		vec.insert(it2, 2, 300);
+		vec.insert(it2, 4, 300);
 		std::cout << "std::vector - ";
 		print_vector(c1);
 		std::cout << "ft::vector  - ";
@@ -190,13 +185,66 @@ int main() {
 		// print_vector(vec);
 		// std::cout << "-\n";
 	}
-	// std::cout << "--------" << std::endl;
-	// {
-	// 	ft::vector<int> vec;
-	// 	vec.push_back(1);
-	// 	vec.push_back(4);
-	// 	vec.push_back(7);
+	std::cout << "--------" << std::endl;
+	{
+		ft::vector<int> vec;
+		vec.push_back(1);
+		vec.push_back(4);
+		vec.push_back(7);
 
-	// 	std::cout << *(vec.rbegin()) << std::endl;
-	// }
+		std::cout << *(vec.rbegin()) << std::endl;
+	}
+	std::cout << "--------" << std::endl;
+	{
+		ft::vector<int> c;
+		c.push_back(1);
+		c.push_back(2);
+		c.push_back(3);
+		c.push_back(4);
+		c.push_back(5);
+		c.push_back(6);
+		c.push_back(7);
+		c.push_back(8);
+		print_vector(c);
+	
+		c.erase(c.begin());
+		print_vector(c);
+	
+		c.erase(c.begin()+2, c.begin()+5);
+		print_vector(c);
+	}
+	std::cout << "--------" << std::endl;
+	{
+		ft::vector<int> c;
+		c.push_back(1);
+		c.push_back(2);
+		c.push_back(3);
+		std::cout << "The vector holds: ";
+		print_vector(c);
+
+		c.resize(5);
+		std::cout << "After resize up to 5: ";
+		print_vector(c);
+		
+		c.resize(2);
+		std::cout << "After resize down to 2: ";
+		print_vector(c);
+		
+		// c.resize(6, 4);
+		// std::cout << "After resize up to 6 (initializer = 4): ";
+		// print_vector(c);
+	}
+	std::cout << "--------" << std::endl;
+	{
+		ft::vector<int> v1(2, 5);
+		ft::vector<int> v2(4, 8);
+		std::cout << "Before swap:\n";
+		print_vector(v1);
+		print_vector(v2);
+		
+		v1.swap(v2);
+		std::cout << "After swap:\n";
+		print_vector(v1);
+		print_vector(v2);
+	}
 }
