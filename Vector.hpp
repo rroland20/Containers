@@ -204,8 +204,9 @@ namespace ft
 		void clear() { _data_destroy(); }
 
 		iterator insert(iterator pos, const value_type& value) {
+			size_type position = &(*pos) - _start;
 			insert(pos, 1, value);
-			return _start + (&(*pos) - _start);
+			return _start + position;
 		}
 
 		void insert(iterator pos, size_type count, const value_type& value) {
@@ -297,12 +298,13 @@ namespace ft
 			if (!count)
 				return ;
 			if (size() + count <= capacity()) {
-				iterator it = _finish + 1;
+				iterator it = _finish + count - 1;
 				for (; it != pos + count - 1; --it)
 					_alloc.construct(&(*it), *(it - count));
 				for (size_type i = 0; i < count; ++i, --it)
 					_alloc.construct(&(*it), value);
 				_finish += count;
+				std::cout << "size() + count <= capacity(): " << *_start << " - " << *_finish << " - " << *_end_of_storage << std::endl;
 			}
 			else {
 				size_type new_cap = capacity() * 2;
@@ -324,18 +326,19 @@ namespace ft
 						++old_start;
 					}
 				}
+				std::cout << "size() + count > capacity(): " << *_start << " - " << *_finish << " - " << *_end_of_storage << std::endl;
 				old_start -= old_size;
 				_alloc.deallocate(old_start, old_cap);
 			}
 		}
 
-		template< class InputIt >
+		template <class InputIt>
 		void _insert(iterator pos, InputIt first, InputIt last, ft::false_type) {
 			size_type count = ft::iterLen(first, last);
 			if (!count)
 				return ;
 			if (size() + count <= capacity()) {
-				iterator it = _finish + 1;
+				iterator it = _finish + count - 1;
 				for (; it != pos + count - 1; --it)
 					_alloc.construct(&(*it), *(it - count));
 				for (size_type i = 0; i < count; ++i, --it) {
@@ -372,5 +375,7 @@ namespace ft
 		}
 	};
 	// Non-member functions //
-
+	// template <class T, class Alloc>
+	// bool operator==(const std::vector<T,Alloc>& lhs, const std::vector<T,Alloc>& rhs)
+	// { return lhs == rhs; }
 }

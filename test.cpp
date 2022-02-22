@@ -163,7 +163,6 @@ int main() {
 		print_vector(vec);
 		std::cout << "-\n";
 	
-		std::cout << c1.capacity() << " - " << vec.capacity() << " " << vec.size() << std::endl;
 		c1.insert(it, 2, 300); //2
 		vec.insert(it2, 4, 300);
 		std::cout << "std::vector - ";
@@ -171,19 +170,20 @@ int main() {
 		std::cout << "ft::vector  - ";
 		print_vector(vec);
 		std::cout << "-\n";
+		// std::cout << c1.capacity() << " - " << vec.capacity() << " " << vec.size() << std::endl;
 
-		// it = c1.begin();
-		// it2 = vec.begin();
+		it = c1.begin();
+		it2 = vec.begin();
 	
-		// std::vector<int> c2(2, 400); //3
-		// ft::vector<int> vec2(2, 400);
-		// c1.insert(it, c2.begin(), c2.end());
-		// vec.insert(it2, vec2.begin(), vec2.end());
-		// std::cout << "std::vector - ";
-		// print_vector(c1);
-		// std::cout << "ft::vector  - ";
-		// print_vector(vec);
-		// std::cout << "-\n";
+		std::vector<int> c2(2, 400); //3
+		ft::vector<int> vec2(2, 400);
+		c1.insert(it, c2.begin(), c2.end());
+		vec.insert(it2, vec2.begin(), vec2.end());
+		std::cout << "std::vector - ";
+		print_vector(c1);
+		std::cout << "ft::vector  - ";
+		print_vector(vec);
+		std::cout << "-\n";
 	}
 	std::cout << "--------" << std::endl;
 	{
@@ -230,9 +230,9 @@ int main() {
 		std::cout << "After resize down to 2: ";
 		print_vector(c);
 		
-		// c.resize(6, 4);
-		// std::cout << "After resize up to 6 (initializer = 4): ";
-		// print_vector(c);
+		c.resize(6, 4);
+		std::cout << "After resize up to 6 (initializer = 4): ";
+		print_vector(c);
 	}
 	std::cout << "--------" << std::endl;
 	{
