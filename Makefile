@@ -1,10 +1,10 @@
 NAME = containers
 
-SOURCE = test.cpp
+SOURCE = test.cpp vector_test.cpp stack_test.cpp
 
 OBJ_DIR = .obj
 
-HDR = Vector.hpp
+HDR = vector.hpp
 
 FLAGS = -Wall -Wextra -Werror --std=c++98
 

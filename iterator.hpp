@@ -2,7 +2,7 @@
 
 #include <cstddef>
 #include <iostream>
-#include "Iterator_traits.hpp"
+#include "iterator_traits.hpp"
 
 namespace ft {
 	template<
