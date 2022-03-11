@@ -1,6 +1,6 @@
 NAME = containers
 
-SOURCE = test.cpp vector_test.cpp stack_test.cpp
+SOURCE = test.cpp vector_test.cpp stack_test.cpp map_test.cpp
 
 OBJ_DIR = .obj
 
