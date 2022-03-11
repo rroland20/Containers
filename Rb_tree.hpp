@@ -87,7 +87,7 @@ namespace ft {
 			return _Res(iterator(res.first), false);
     	}
 
-		iterator insert_unique(const_iterator pos, const value_type& val) {
+		iterator insert_unique(iterator pos, const value_type& val) {
 			ft::pair<node, node> res = _get_insert_hint_unique_pos(pos, get_key(val));
 
       		if (res.second)
@@ -110,11 +110,11 @@ namespace ft {
 		KeyOfValue							get_key;
 
 		void put_node(node y) {
-			_alloc.deallocate(y, 1);
+			node_alloc.deallocate(y, 1);
 		}
 
 		void destroy_node(node y) {
-			_alloc.destroy(&y->value);
+			_alloc.destroy(&(y->value));
 		}
 
 		void drop_node(node y) {
@@ -122,13 +122,13 @@ namespace ft {
 			put_node(y);
 		}
 
-		void _M_erase_aux(const_iterator position) {
+		void _M_erase_aux(iterator position) {
 			node y = rebalance_for_erase(position._node);
 			drop_node(y);
-			--size;
+			--_size;
 		}
 
-		void _M_erase_aux(const_iterator first, const_iterator last) {
+		void _M_erase_aux(iterator first, iterator last) {
 			if (first == begin() && last == end())
 				clear();
       		else
@@ -142,8 +142,7 @@ namespace ft {
 			header->color = red;
 		}
 
-		node	create_node(const value_type& x)
-		{
+		node	create_node(const value_type& x) {
 			node tmp = node_alloc.allocate(1);
 			_alloc.construct(&(tmp->value), x);
 			tmp->color = black;
@@ -328,7 +327,7 @@ namespace ft {
 		}
 
 		void RBtree_rotate_left(node x, node& root) {
-			node y = x->right;
+			node const y = x->right;
 			x->right = y->left;
 			if (y->left != 0)
 				y->left->parent = x;
@@ -345,10 +344,10 @@ namespace ft {
 		}
 
 		void RBtree_rotate_right(node x, node& root) {
-			node y = x->left;
+			node const y = x->left;
 			x->left = y->right;
 			if(y->right != 0)
-				y->right->parent=x;
+				y->right->parent = x;
 			y->parent = x->parent;
 
 			if(x == root)
@@ -384,8 +383,9 @@ namespace ft {
 				y->left = z->left;
 				if (y != z->right) {
 					x_parent = y->parent;
-					if (x) x->parent = y->parent;
-						y->parent->left = x;
+					if (x)
+						x->parent = y->parent;
+					y->parent->left = x;
 					y->right = z->right;
 					z->right->parent = y;
 				}
@@ -452,7 +452,7 @@ namespace ft {
 							if (w->right)
 								w->right->color = black;
 							RBtree_rotate_left(x_parent, root);
-							break;
+							break ;
 						}
 					}
 					else {
@@ -481,7 +481,7 @@ namespace ft {
 							if (w->left)
 								w->left->color = black;
 							RBtree_rotate_right(x_parent, root);
-							break;
+							break ;
 						}
 					}
 				}
@@ -610,9 +610,9 @@ namespace ft {
 			return iterator(z);
 		}
 
-		pair<node, node> _get_insert_unique_pos(const key_type& key) {
+		pair<node, node> _get_insert_unique_pos(const key_type key) {
 			typedef pair<node, node> _Res;
-			node x = header->parent;
+			node x = static_cast<node>(header->parent);
 			node y = header;
 			bool comp = true;
 
@@ -637,12 +637,12 @@ namespace ft {
 
 		node rightmost() { return header->right; }
 
-		pair<node, node> _get_insert_hint_unique_pos(const_iterator pos, const key_type& key) {
+		pair<node, node> _get_insert_hint_unique_pos(iterator pos, const key_type& key) {
       		typedef pair<node, node> _Res;
 
 			if (pos._node == header) {
 				node r = rightmost();
-				if (size() > 0 && _comp(get_key(r), key))
+				if (_size > 0 && _comp(get_key(r->value), key))
 					return _Res(0, r);
 				else
 					return _get_insert_unique_pos(key);
@@ -653,7 +653,7 @@ namespace ft {
 				node l = leftmost();
 				if (pos._node == l)
 					return _Res(l, l);
-				else if (_comp(get_key((--before)._node->value), key)) {
+				else if (_comp(get_key((--before)._node->value), key)) { // check
 					if (before._node->right == 0)
 						return _Res(0, before._node);
 					else
@@ -662,13 +662,13 @@ namespace ft {
 				else
 					return _get_insert_unique_pos(key);
 			}
-			else if (_comp(get_key(pos._node), key))
+			else if (_comp(get_key(pos._node->value), key))
 			{
 				iterator after = pos;
 				node r = rightmost();
 				if (pos._node == r)
 					return _Res(0, r);
-				else if (_comp(key, get_key((++after)._node->value))) {
+				else if (_comp(key, get_key((++after)._node->value))) { // check
 					if (pos._node->right == 0)
 						return _Res(0, pos._node);
 					else

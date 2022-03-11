@@ -51,7 +51,7 @@ namespace ft {
 						x = x->left;
 				}
 				else {
-					_Base_ptr	y = x->parent;
+					_Base_ptr y = x->parent;
 					while (x == y->right)
 					{
 						x = y;
@@ -64,7 +64,7 @@ namespace ft {
 			}
 
 			_Base_ptr _Rb_tree_decrement() {
-				_Base_ptr	x = _node;
+				_Base_ptr x = _node;
 				if (x->color == red && x->parent->parent == x)
 					x = x->right;
 				else if (x->left != 0) {
@@ -74,7 +74,7 @@ namespace ft {
 					x = y;
 				}
 				else {
-					_Base_ptr	y = x->parent;
+					_Base_ptr y = x->parent;
 					while (x == y->left) {
 						x = y;
 						y = y->parent;
@@ -105,8 +105,10 @@ namespace ft {
 
 		RBTree_const_iterator() : _node() {}
 		explicit RBTree_const_iterator(_Base_ptr node) : _node(node) {}
-		RBTree_const_iterator(const iterator& it) : _node(it._node) {}
-	
+		RBTree_const_iterator(const iterator& copy) : _node(copy._node) {}
+		template <typename Iter>
+		RBTree_const_iterator(const RBTree_iterator<Iter>& i) : _node(i._node) {}
+
 		RBTree_const_iterator	&operator=(const RBTree_const_iterator& other) {
 			if (this != &other)
 				_node = other._node;
@@ -114,7 +116,7 @@ namespace ft {
 		}
 		~RBTree_const_iterator() {}
 
-		iterator _M_const_cast() const { return iterator(const_cast<typename iterator::_Base_ptr>(_node)); }
+		iterator _M_const_cast() const { return iterator(const_cast<_Base_ptr>(_node)); }
 		reference operator*() const { return _node->value; }
 		pointer operator->() const { return &(_node->value); }
 		_Self&		operator++() { _node = _Rb_tree_increment(); return *this; }
@@ -127,17 +129,14 @@ namespace ft {
 	private:
 		_Base_ptr _Rb_tree_increment() {
 			_Base_ptr x = _node;
-			if (x->right != 0)
-			{
+			if (x->right != 0) {
 				x = x->right;
 				while (x->left != 0)
 					x = x->left;
 			}
-			else
-			{
+			else {
 				_Base_ptr y = x->parent;
-				while (x == y->right)
-				{
+				while (x == y->right) {
 					x = y;
 					y = y->parent;
 				}
@@ -151,18 +150,15 @@ namespace ft {
 			_Base_ptr x = _node;
 			if (x->color == red && x->parent->parent == x)
 				x = x->right;
-			else if (x->left != 0)
-			{
+			else if (x->left != 0) {
 				_Base_ptr	y = x->left;
 				while (y->right != 0)
 					y = y->right;
 				x = y;
 			}
-			else
-			{
+			else {
 				_Base_ptr y = x->parent;
-				while (x == y->left)
-				{
+				while (x == y->left) {
 					x = y;
 					y = y->parent;
 				}
