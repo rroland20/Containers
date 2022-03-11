@@ -22,7 +22,7 @@ namespace ft {
 		_Base_ptr _node;
 
 		RBTree_iterator() : _node(0) {}
-		explicit RbTree_iterator(_Base_ptr node) : _node(node) {}
+		explicit RBTree_iterator(_Base_ptr node) : _node(node) {}
 
 		RBTree_iterator(const RBTree_iterator& copy) : _node(copy._node) {}
 		RBTree_iterator	&operator=(const RBTree_iterator& other) {
@@ -45,14 +45,12 @@ namespace ft {
 		private:
 			_Base_ptr _Rb_tree_increment() {
 				_Base_ptr x = _node;
-				if (x->right != 0)
-				{
+				if (x->right != 0) {
 					x = x->right;
 					while (x->left != 0)
 						x = x->left;
 				}
-				else
-				{
+				else {
 					_Base_ptr	y = x->parent;
 					while (x == y->right)
 					{
@@ -66,21 +64,18 @@ namespace ft {
 			}
 
 			_Base_ptr _Rb_tree_decrement() {
-				_Base_ptr	x = _M_node;
+				_Base_ptr	x = _node;
 				if (x->color == red && x->parent->parent == x)
 					x = x->right;
-				else if (x->left != 0)
-				{
+				else if (x->left != 0) {
 					_Base_ptr	y = x->left;
 					while (y->right != 0)
 						y = y->right;
 					x = y;
 				}
-				else
-				{
+				else {
 					_Base_ptr	y = x->parent;
-					while (x == y->left)
-					{
+					while (x == y->left) {
 						x = y;
 						y = y->parent;
 					}
@@ -109,7 +104,7 @@ namespace ft {
 		_Base_ptr _node;
 
 		RBTree_const_iterator() : _node() {}
-		explicit RbTree_const_iterator(_Base_ptr node) : _node(node) {}
+		explicit RBTree_const_iterator(_Base_ptr node) : _node(node) {}
 		RBTree_const_iterator(const iterator& it) : _node(it._node) {}
 	
 		RBTree_const_iterator	&operator=(const RBTree_const_iterator& other) {

@@ -35,10 +35,10 @@ namespace ft {
 		// Member function //
 		Rb_tree() {}
 		Rb_tree(const Compare& comp, const allocator_type& alloc = allocator_type())
-      		: _comp(comp), _alloc(alloc), _size(0) { create_header(); }
+      		: _comp(comp), _alloc(alloc), _size(0) { _create_header(); }
 		Rb_tree(const Rb_tree& cpy) : _comp(cpy._comp), _alloc(cpy._alloc), _size(cpy._size) {
-			create_header();
-			if (x.header->parent != 0)
+			_create_header();
+			if (cpy.header->parent != 0)
 				header->parent = copy(cpy);
 		}
 
@@ -71,7 +71,7 @@ namespace ft {
 		bool empty() const { return _size == 0; }
 		size_type size() const { return _size; }
 		size_type max_size() const { return node_alloc.max_size(); }
-		void swap(RBTree& t) {
+		void swap(Rb_tree& t) {
 			ft::swap(header, t.header);
 			ft::swap(_size, t._size);
 		}
@@ -208,22 +208,22 @@ namespace ft {
 		{ return _equal_range(key); }
 
 		// Operators //
-		friend bool operator==(const _Rb_tree& x, const _Rb_tree& y)
+		friend bool operator==(const Rb_tree& x, const Rb_tree& y)
 		{ return x.size() == y.size() && ft::equal(x.begin(), x.end(), y.begin()); }
 
-		friend bool operator<(const _Rb_tree& x, const _Rb_tree& y)
+		friend bool operator<(const Rb_tree& x, const Rb_tree& y)
 		{ return ft::lexicographical_compare(x.begin(), x.end(), y.begin(), y.end()); }
 
-		friend bool operator!=(const _Rb_tree& x, const _Rb_tree& y)
+		friend bool operator!=(const Rb_tree& x, const Rb_tree& y)
 		{ return !(x == y); }
 
-		friend bool operator>(const _Rb_tree& x, const _Rb_tree& y)
+		friend bool operator>(const Rb_tree& x, const Rb_tree& y)
 		{ return y < x; }
 
-		friend bool operator<=(const _Rb_tree& x, const _Rb_tree& y)
+		friend bool operator<=(const Rb_tree& x, const Rb_tree& y)
 		{ return !(y < x); }
 
-		friend bool operator>=(const _Rb_tree& x, const _Rb_tree& y)
+		friend bool operator>=(const Rb_tree& x, const Rb_tree& y)
 		{ return !(x < y); }
 
 	private:
@@ -518,7 +518,16 @@ namespace ft {
 			return top;
 		}
 
-		node copy(const RBTree& x) {
+		void erase(node x) {
+			while (x != 0) {
+				erase(x->right);
+				node y = x->left;
+				drop_node(x);
+				x = y;
+			}
+		}
+
+		node copy(const Rb_tree& x) {
 			node root = copy(x.header->parent, header);
 			header->left = minimum(root);
 			header->right = maximum(root);
@@ -592,7 +601,7 @@ namespace ft {
 		}
 
 		iterator _insert(node x, node p, const value_type& value) {
-			bool insert_left = (x != 0 || p == header || _comp(get_key(val), get_key(p->value)));
+			bool insert_left = (x != 0 || p == header || _comp(get_key(value), get_key(p->value)));
 
 			node z = create_node(value);
 

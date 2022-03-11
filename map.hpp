@@ -109,7 +109,7 @@ namespace ft {
 		void clear() { return tree.clear(); }
 		std::pair<iterator, bool> insert(const value_type& x) { return tree.insert_unique(x); }
 		iterator insert(iterator hint, const value_type& value) { return tree.insert_unique(hint, value); }
-		template <class InputIterator>
+		template <class InputIt>
 		void insert(InputIt first, InputIt last) { tree.insert_range_unique(first, last); }
 		void erase( iterator pos ) { tree.erase(pos); }
 		void erase( iterator first, iterator last ) { tree.erase(first, last); }
