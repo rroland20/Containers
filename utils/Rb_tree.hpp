@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <cstddef>
 #include "pair.hpp"
 #include "map_utils.hpp"
 #include "Rb_tree_iterator.hpp"
@@ -25,7 +26,7 @@ namespace ft {
 		typedef value_type& 				reference;
 		typedef const value_type& 			const_reference;
 		typedef size_t 						size_type;
-		typedef ptrdiff_t 					difference_type;
+		typedef std::ptrdiff_t 				difference_type;
 		typedef Alloc 						allocator_type;
 		typedef ft::RBTree_iterator<value_type>			iterator;
 		typedef ft::RBTree_const_iterator<value_type>	const_iterator;

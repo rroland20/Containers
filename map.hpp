@@ -1,16 +1,14 @@
 #pragma once
 
-#include <iostream>
 #include "pair.hpp"
 #include "map_utils.hpp"
 #include "Rb_tree.hpp"
 #include "equal_and_lexografical_compare.hpp"
-#include <map>
 #include <memory>
 
 namespace ft {
 	template< class Key, class T, class Compare = std::less<Key>, 
-		class Allocator = std::allocator<std::pair<const Key, T> > >
+		class Allocator = std::allocator<ft::pair<const Key, T> > >
 	class map {
 	public:
 		typedef Key						key_type;
@@ -107,7 +105,7 @@ namespace ft {
 
 		// Modifiers //
 		void clear() { return tree.clear(); }
-		std::pair<iterator, bool> insert(const value_type& x) { return tree.insert_unique(x); }
+		ft::pair<iterator, bool> insert(const value_type& x) { return tree.insert_unique(x); }
 		iterator insert(iterator hint, const value_type& value) { return tree.insert_unique(hint, value); }
 		template <class InputIt>
 		void insert(InputIt first, InputIt last) { tree.insert_range_unique(first, last); }

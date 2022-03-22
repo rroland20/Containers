@@ -88,10 +88,11 @@ namespace ft {
 	template <typename T>
 	struct RBTree_const_iterator : public ft::bidirectional_iterator<const T> {
 		typedef ft::bidirectional_iterator<T>			bid_iter;
+		typedef ft::bidirectional_iterator<const T>		const_bid_iter;
 
 		typedef T  										value_type;
-		typedef typename bid_iter::reference			reference;
-		typedef typename bid_iter::pointer				pointer;
+		typedef typename const_bid_iter::reference		reference;
+		typedef typename const_bid_iter::pointer		pointer;
 
 		typedef RBTree_iterator<T>						iterator;
 

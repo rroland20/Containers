@@ -37,4 +37,11 @@ namespace ft {
 		y = z;
 	}
 
+	// Only set //
+	template<typename T>
+    struct Identity {
+		T& operator()(T& x) const { return x; }
+
+		const T& operator()(const T& x) const { return x; }
+	};
 }
