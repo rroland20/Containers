@@ -1,29 +1,35 @@
-NAME = containers
+NAME = containers_ft
 
-SOURCE = tests/test.cpp tests/vector_test.cpp tests/stack_test.cpp tests/map_test.cpp tests/set_test.cpp
-# SOURCE = main.cpp
+NAME_STD = containers_std
 
-OBJ_DIR = .obj
+SOURCE = test.cpp tests/vector_test.cpp tests/stack_test.cpp tests/map_test.cpp tests/set_test.cpp
 
-HDR = test.hpp vector.hpp stack.hpp map.hpp set.hpp
+HDR = tests/test.hpp vector.hpp stack.hpp map.hpp set.hpp
 
 FLAGS = -Wall -Wextra -Werror --std=c++98
 
-OBJ = $(addprefix $(OBJ_DIR)/,$(SOURCE:.cpp=.o))
+OBJ = $(SOURCE:.cpp=.o)
 
-all: $(NAME)
+OBJ_STD = $(addsuffix _std.o, $(basename $(SOURCE)))
+
+all: $(NAME) $(NAME_STD)
 
 $(NAME): $(OBJ)
-	@clang++ $(SOURCE) -o $(NAME)
+	@clang++ $(OBJ) -o $(NAME)
 
-$(OBJ_DIR)/%.o:%.cpp $(HDR)
-	@mkdir -p $(OBJ_DIR)
+$(NAME_STD): $(OBJ_STD)
+	@clang++ $(OBJ_STD) -o $(NAME_STD)
+
+%.o:%.cpp $(HDR)
 	@clang++ -c $(FLAGS) $< -o $@
 
+%_std.o:%.cpp $(HDR)
+	@clang++ -c $(FLAGS) $< -o $@ -D STD
+
 clean:
-	@rm -rf $(OBJ_DIR)
+	@rm -rf $(OBJ) $(OBJ_STD)
 
 fclean: clean
-	@rm -rf $(NAME)
+	@rm -rf $(NAME) $(NAME_STD)
 
 re: fclean all

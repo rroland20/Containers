@@ -1,9 +1,9 @@
 #pragma once
 
-#include "pair.hpp"
-#include "map_utils.hpp"
-#include "Rb_tree.hpp"
-#include "equal_and_lexografical_compare.hpp"
+#include "utils/pair.hpp"
+#include "utils/map_utils.hpp"
+#include "utils/Rb_tree.hpp"
+#include "utils/equal_and_lexografical_compare.hpp"
 #include <memory>
 
 namespace ft {
@@ -19,12 +19,11 @@ namespace ft {
 		
 		// Member classes //
 		class value_compare: public ft::binary_function<value_type, value_type, bool> {
-			// friend class map<_Key, _Tp, _Compare, _Alloc>;
       	protected:
 			key_compare comp;
-			value_compare(key_compare c) : comp(c) {}
 
 		public:
+			value_compare(key_compare c) : comp(c) {}
 			bool operator()(const value_type& x, const value_type& y) const
 			{ return comp(x.first, y.first); }
 		};

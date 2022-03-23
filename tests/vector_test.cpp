@@ -1,10 +1,14 @@
 #include <iostream>
-#include "vector.hpp"
-#include <vector>
-#include <iterator>
+#include <string>
 #include <iomanip>
-#include <algorithm>
 #include "test.hpp"
+
+#ifdef STD
+namespace ft = std;
+# include <vector>
+#else
+# include "../vector.hpp"
+#endif
 
 template <typename T>
 void print_vector(ft::vector<T> &vec) {
@@ -13,36 +17,21 @@ void print_vector(ft::vector<T> &vec) {
 	std::cout << std::endl;
 }
 
-template <typename T>
-void print_vector(std::vector<T> &vec) {
-	for(size_t i = 0; i != vec.size(); ++i)
-		std::cout << vec[i] << " ";
-	std::cout << std::endl;
-}
-
 void vector_test() {
 	{
-		std::vector<int> v;
 		ft::vector<int> v1;
 
-		std::cout << v.max_size() << " " << v.empty() << std::endl;
 		std::cout << v1.max_size() << " " << v1.empty() << std::endl;
 	}
     std::cout << "--------" << std::endl;
 	{
 		ft::vector<int> myvec(2);
-		std::vector<int> vec(2);
-		std::cout << vec.at(1) << " " << vec.size() << " " << vec.capacity() << std::endl;
 		std::cout << myvec.at(1) << " " << myvec.size() << " " << myvec.capacity()<< std::endl;
-
 	}
     std::cout << "--------" << std::endl;
     {
-        std::vector<int> vec(3, 5);
         ft::vector<int> v(3, 5);
-        std::vector<int> vecs(vec.begin(), vec.end());
         ft::vector<int> ve(v.begin(), v.end()); // fix vec to v
-        std::cout << vecs[1] << " " << vecs.size() << " " << vecs.capacity()  << std::endl;
         std::cout << ve[1] << " " << ve.size() << " " << ve.capacity() << std::endl;
     }
     std::cout << "--------" << std::endl;
@@ -75,16 +64,12 @@ void vector_test() {
 	}
     std::cout << "--------" << std::endl;
 	{
-		std::vector<int> vec;
 		ft::vector<int> v;
-		vec.push_back(33);
-		vec.push_back(45);
 		v.push_back(33);
 		v.push_back(45);
-		vec.reserve(5);
 		v.reserve(5);
 		std::cout << v[3] << std::endl;
-		std::cout << vec.capacity() << " " << v.capacity() << std::endl;
+		std::cout << v.capacity() << std::endl;
 	}
 	std::cout << "--------" << std::endl;
 	{
@@ -134,7 +119,7 @@ void vector_test() {
 	}
 	std::cout << "--------" << std::endl;
 	{
-		std::vector<int> vec(5, 7);
+		ft::vector<int> vec(5, 7);
 
 		vec.resize(8, 5);
 		print_vector(vec);
@@ -146,42 +131,24 @@ void vector_test() {
 	}
 	std::cout << "--------" << std::endl;
 	{
-		std::vector<int> c1(3, 100);
 		ft::vector<int> vec(3, 100);
-		std::cout << "std::vector - ";
-		print_vector(c1);
 		std::cout << "ft::vector - ";
 		print_vector(vec);
 		std::cout << "-\n";
 	
-		std::vector<int>::iterator it = c1.begin(); //1
 		ft::vector<int>::iterator it2 = vec.begin();
-		it = c1.insert(it, 200);
 		it2 = vec.insert(it2, 200);
-		std::cout << "std::vector - ";
-		print_vector(c1);
-		std::cout << "ft::vector  - ";
 		print_vector(vec);
 		std::cout << "-\n";
 	
-		c1.insert(it, 4, 300); //2
 		vec.insert(it2, 4, 300);
-		std::cout << "std::vector - ";
-		print_vector(c1);
-		std::cout << "ft::vector  - ";
 		print_vector(vec);
 		std::cout << "-\n";
 
-		it = c1.begin();
 		it2 = vec.begin();
 	
-		std::vector<int> c2(2, 400); //3
 		ft::vector<int> vec2(2, 400);
-		c1.insert(it, c2.begin(), c2.end());
 		vec.insert(it2, vec2.begin(), vec2.end());
-		std::cout << "std::vector - ";
-		print_vector(c1);
-		std::cout << "ft::vector  - ";
 		print_vector(vec);
 		std::cout << "-\n";
 	}

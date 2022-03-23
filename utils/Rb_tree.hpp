@@ -166,7 +166,7 @@ namespace ft {
 			ft::pair<iterator, iterator> p = _equal_range(key);
 			const size_type old_size = _size;
 
-			erase_aux(p.first, p.second);
+			_M_erase_aux(p.first, p.second);
 			return old_size - _size;
 		}
 
@@ -185,7 +185,7 @@ namespace ft {
 		}
 
 		const_iterator find(const key_type& key) const {
-			iterator j = _M_lower_bound(header->parent, header, key);
+			const_iterator j = _M_lower_bound(header->parent, header, key);
 			return (j == end() || _comp(key, get_key(j._node->value))) ? end() : j;
 		}
 
@@ -323,7 +323,7 @@ namespace ft {
 
 		node maximum(node x) {
 			while(x->right)
-				x = x->right();
+				x = x->right;
 			return x;
 		}
 
@@ -654,7 +654,7 @@ namespace ft {
 				node l = leftmost();
 				if (pos._node == l)
 					return _Res(l, l);
-				else if (_comp(get_key((--before)._node->value), key)) { // check
+				else if (_comp(get_key((--before)._node->value), key)) {
 					if (before._node->right == 0)
 						return _Res(0, before._node);
 					else
@@ -669,7 +669,7 @@ namespace ft {
 				node r = rightmost();
 				if (pos._node == r)
 					return _Res(0, r);
-				else if (_comp(key, get_key((++after)._node->value))) { // check
+				else if (_comp(key, get_key((++after)._node->value))) {
 					if (pos._node->right == 0)
 						return _Res(0, pos._node);
 					else

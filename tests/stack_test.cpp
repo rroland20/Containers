@@ -1,7 +1,12 @@
-#include "test.hpp"
 #include <iostream>
-// #include <stack>
-#include "stack.hpp"
+#include "test.hpp"
+
+#ifdef STD
+namespace ft = std;
+# include <stack>
+#else
+# include "../stack.hpp"
+#endif
 
 void reportStackSize(const ft::stack<int>& s)
 {
