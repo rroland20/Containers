@@ -26,12 +26,12 @@ namespace ft {
 		typedef typename allocator_type::const_pointer		const_pointer;
 		typedef typename allocator_type::reference			reference;
 		typedef typename allocator_type::const_reference	const_reference;
-		typedef typename _tree_type::const_iterator			iterator;
+		typedef typename _tree_type::iterator				iterator;
 		typedef typename _tree_type::const_iterator			const_iterator;
-		typedef typename _tree_type::const_reverse_iterator	reverse_iterator;
+		typedef typename _tree_type::reverse_iterator		reverse_iterator;
 		typedef typename _tree_type::const_reverse_iterator	const_reverse_iterator;
-		typedef typename _tree_type::size_type				size_type; // check
-		typedef typename _tree_type::difference_type		difference_type; // check
+		typedef typename _tree_type::size_type				size_type;
+		typedef typename _tree_type::difference_type		difference_type;
 
 		// Member functions //
 		explicit set(const key_compare& c = key_compare(), const allocator_type& alloc = allocator_type())

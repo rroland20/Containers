@@ -129,7 +129,7 @@ namespace ft
 		reference at(size_type pos) {
 			if (pos >= size()) {
 				std::ostringstream msg;
-				msg << "vector::_M_range_check: _n (which is " << pos << ") >= this->size() (which is " << size() << ")";
+				msg << "vector::_M_range_check: __n (which is " << pos << ") >= this->size() (which is " << size() << ")";
 				throw std::out_of_range(msg.str());
 			}
 			return (*this)[pos];
@@ -138,7 +138,7 @@ namespace ft
 		const_reference at(size_type pos) const {
 			if (pos >= size()) {
 				std::ostringstream msg;
-				msg << "vector::_M_range_check: _n (which is " << pos << ") >= this->size() (which is " << size() << ")";
+				msg << "vector::_M_range_check: __n (which is " << pos << ") >= this->size() (which is " << size() << ")";
 				throw std::out_of_range(msg.str());
 			}
 			return (*this)[pos];
@@ -305,7 +305,7 @@ namespace ft
 				_finish += count;
 			}
 			else {
-				size_type new_cap = capacity() * 2;
+				size_type new_cap = size() * 2;
 				if (new_cap < size() + count)
 					new_cap = size() + count;
 				if (new_cap > max_size())
@@ -345,7 +345,7 @@ namespace ft
 				_finish += count;
 			}
 			else {
-				size_type new_cap = capacity() * 2;
+				size_type new_cap = size() * 2;
 				if (new_cap < size() + count)
 					new_cap = size() + count;
 				if (new_cap > max_size())

@@ -66,7 +66,7 @@ namespace ft {
 		reverse_iterator&	operator+=(difference_type n) { _iter -= n; return *this; }
 		reverse_iterator	operator-(difference_type n) const { return reverse_iterator(_iter + n); }
 		reverse_iterator&	operator-=(difference_type n) { _iter += n; return *this; }
-		reference operator[](difference_type n) const { return *(*this + n); }
+		reference 			operator[](difference_type n) const { return *(*this + n); }
 	};
 
 	template<typename _Iterator>
