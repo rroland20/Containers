@@ -25,7 +25,7 @@ namespace ft {
 			}
 			return *this;
 		}
-        virtual ~stack() {}
+        ~stack() {}
 
 		template<typename T1, typename Container1>
 		friend bool operator==(const stack<T1, Container1>&, const stack<T1, Container1>&);
@@ -35,15 +35,15 @@ namespace ft {
 
 		// Element access //
 		reference top() { return cont.back(); }
-		const_reference top() const { return cont.back(); }
+		const_reference& top() const { return cont.back(); }
 
 		// Capacity //
 		bool empty() const { return cont.empty(); }
 		size_type size() const { return cont.size(); }
 
 		// Modifiers //
-		void push(const value_type& value) { return cont.push_back(value); }
-		void pop() { return cont.pop_back(); }
+		void push(const value_type& value) { cont.push_back(value); }
+		void pop() { cont.pop_back(); }
     };
 	// Non-member functions //
 	template<class T, class Container>

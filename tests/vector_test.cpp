@@ -32,8 +32,8 @@ void vector_test() {
 	std::cout << "\n<<<< VECTOR >>>>\n\n";
 	{
 		std::cout << "Constuctor:\n";
-		ft::vector<int> v1;
-		ft::vector<int> v2(10);
+		ft::vector<std::string> v1;
+		ft::vector<std::string> v2(3, "aa");
 
 		std::cout << "  Default:\n";
 		print_param(v1);
@@ -182,12 +182,12 @@ void vector_test() {
 	std::cout << "--------" << std::endl;
 	{
 		std::cout << "Push and pop:\n";
-		ft::vector<char> vec;
+		ft::vector<std::string> vec;
 		std::cout << "  Before push_back:\n";
 		print_param(vec);
-		vec.push_back('a');
-		vec.push_back('b');
-		vec.push_back('c');
+		vec.push_back("aaa");
+		vec.push_back("bbb");
+		vec.push_back("ccc");
 		std::cout << "  After push_back:\n";
 		print_param(vec);
 

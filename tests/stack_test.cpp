@@ -14,7 +14,7 @@ void print_top(const ft::stack<T> &s) {
 }
 
 template <typename T>
-void print_stack(ft::stack<T> &s) {
+void print_stack(ft::stack<T> s) {
 	std::cout << "\tStack:\t\t\t";
 	for (; !s.empty();) {
 		std::cout << s.top() << " ";
@@ -25,7 +25,7 @@ void print_stack(ft::stack<T> &s) {
 }
 
 template <typename T>
-void print_param(ft::stack<T> &s) {
+void print_param(ft::stack<T> s) {
 	std::cout << std::boolalpha;
 	std::cout << "\tStack empty:\t" << s.empty() << std::endl;
 	std::cout << "\tStack size:\t\t" << s.size() << std::endl;
@@ -37,13 +37,13 @@ void stack_test() {
 	{
 		std::cout << "Constructor:\n";
 		std::cout << "  Default constructor:\n";
-		ft::stack<int> s;
+		ft::stack<char> s;
 		print_param(s);
 
 		std::cout << "  Fill stack:\n";
-		s.push(2);
-		s.push(4);
-		s.push(6);
+		s.push('a');
+		s.push('b');
+		s.push('c');
 		print_top(s);
 		print_param(s);
 	}
@@ -64,17 +64,16 @@ void stack_test() {
     }
 	std::cout << "--------" << std::endl;
 	{
-		std::cout << "  Pop:\n";
-		ft::stack<std::string> s;
-		s.push("aaa");
-		s.push("bbb");
-		s.push("ccc");
+		std::cout << "Pop:\n";
+		ft::stack<int> s;
+		s.push(10);
+		s.push(4);
+		s.push(8);
 		std::cout << "  Before pop:\n";
 		print_top(s);
 		print_param(s);
-		s.push("aaa");
-		s.push("bbb");
-		s.push("ccc");
+		s.push(4);
+		s.push(8);
 
 		s.pop();
 		s.pop();
