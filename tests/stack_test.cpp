@@ -53,10 +53,10 @@ void stack_test() {
 		ft::stack<int> s;
 		std::cout << "  Before push:\n";
 		print_param(s);
+		
 		s.push(2);
 		s.push(6);
 		s.push(51);
-
 		std::cout << "  After push:\n";
 		print_top(s);
 		print_param(s);
@@ -72,8 +72,6 @@ void stack_test() {
 		std::cout << "  Before pop:\n";
 		print_top(s);
 		print_param(s);
-		s.push(4);
-		s.push(8);
 
 		s.pop();
 		s.pop();
@@ -99,13 +97,6 @@ void stack_test() {
 		print_stack(s);
 		std::cout << "  Stack s2:\n";
 		print_stack(s1);
-		s.push(1);
-		s.push(2);
-		s.push(3);
-		s.push(4);
-		s1.push(10);
-		s1.push(13);
-		s1.push(15);
 
 		std::cout << "\n\ts1 == s2:\t\t" << (s == s1) << std::endl;
 		std::cout << "\ts1 != s2:\t\t" << (s != s1) << std::endl;

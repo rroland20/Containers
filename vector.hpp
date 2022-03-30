@@ -86,8 +86,10 @@ namespace ft
 		}
 
 		void _data_destroy() {
-			for (; _finish != _start; --_finish)
+			while (_finish != _start) {
+				--_finish;
 				_alloc.destroy(_finish);
+			}
 		}
 
 		void _assign(size_type count, const value_type& value, ft::true_type) {
@@ -258,8 +260,8 @@ namespace ft
 		}
 
 		void pop_back() {
-			_alloc.destroy(_finish);
 			--_finish;
+			_alloc.destroy(_finish);
 		}
 
 		void resize(size_type count, value_type value = value_type()) {
