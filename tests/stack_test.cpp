@@ -8,53 +8,111 @@ namespace ft = std;
 # include "../stack.hpp"
 #endif
 
-void reportStackSize(const ft::stack<int>& s)
-{
-    std::cout << s.size() << " elements on stack\n";
+template <typename T>
+void print_top(const ft::stack<T> &s) {
+	std::cout << "\tStack top:\t\t" << s.top() << std::endl;
 }
- 
-void reportStackTop(const ft::stack<int>& s)
-{
-    // Leaves element on stack
-    std::cout << "Top element: " << s.top() << '\n';
+
+template <typename T>
+void print_stack(ft::stack<T> &s) {
+	std::cout << "\tStack:\t\t\t";
+	for (; !s.empty();) {
+		std::cout << s.top() << " ";
+		if (!s.empty())
+			s.pop();
+	}
+	std::cout << std::endl;
+}
+
+template <typename T>
+void print_param(ft::stack<T> &s) {
+	std::cout << std::boolalpha;
+	std::cout << "\tStack empty:\t" << s.empty() << std::endl;
+	std::cout << "\tStack size:\t\t" << s.size() << std::endl;
+	print_stack(s);
 }
 
 void stack_test() {
-    {
+	std::cout << "\n<<<< STACK >>>>\n\n";
+	{
+		std::cout << "Constructor:\n";
+		std::cout << "  Default constructor:\n";
 		ft::stack<int> s;
+		print_param(s);
+
+		std::cout << "  Fill stack:\n";
+		s.push(2);
+		s.push(4);
+		s.push(6);
+		print_top(s);
+		print_param(s);
+	}
+	std::cout << "--------" << std::endl;
+    {
+		std::cout << "Push:\n";
+		ft::stack<int> s;
+		std::cout << "  Before push:\n";
+		print_param(s);
 		s.push(2);
 		s.push(6);
 		s.push(51);
 
-		reportStackSize(s);
-		reportStackTop(s);
+		std::cout << "  After push:\n";
+		print_top(s);
+		print_param(s);
 
-		reportStackSize(s);
-		s.pop();
-
-		reportStackSize(s);
-		reportStackTop(s);
     }
 	std::cout << "--------" << std::endl;
 	{
-		std::cout << std::boolalpha;
-	
-		ft::stack<int> container;
-	
-		std::cout << "Initially, container.empty(): " << container.empty() << '\n';
-	
-		container.push(42);
-		std::cout << "After adding elements, container.empty(): " << container.empty() << '\n';
+		std::cout << "  Pop:\n";
+		ft::stack<std::string> s;
+		s.push("aaa");
+		s.push("bbb");
+		s.push("ccc");
+		std::cout << "  Before pop:\n";
+		print_top(s);
+		print_param(s);
+		s.push("aaa");
+		s.push("bbb");
+		s.push("ccc");
+
+		s.pop();
+		s.pop();
+		std::cout << "  After pop:\n";
+		print_top(s);
+		print_param(s);
 	}
 	std::cout << "--------" << std::endl;
 	{
-		ft::stack<int> container;
- 
-    	std::cout << "Initially, container.size(): " << container.size() << '\n';
+		std::cout << "Operators:\n";
 	
-		for (int i = 0; i < 7; ++i)
-			container.push(i);
-	
-		std::cout << "After adding elements, container.size(): " << container.size() << '\n';
+		ft::stack<int> s;
+		ft::stack<int> s1;
+
+		s.push(1);
+		s.push(2);
+		s.push(3);
+		s.push(4);
+		s1.push(10);
+		s1.push(13);
+		s1.push(15);
+		std::cout << "  Stack s1:\n";
+		print_stack(s);
+		std::cout << "  Stack s2:\n";
+		print_stack(s1);
+		s.push(1);
+		s.push(2);
+		s.push(3);
+		s.push(4);
+		s1.push(10);
+		s1.push(13);
+		s1.push(15);
+
+		std::cout << "\n\ts1 == s2:\t\t" << (s == s1) << std::endl;
+		std::cout << "\ts1 != s2:\t\t" << (s != s1) << std::endl;
+		std::cout << "\ts1 < s2:\t\t" << (s < s1) << std::endl;
+		std::cout << "\ts1 <= s2:\t\t" << (s <= s1) << std::endl;
+		std::cout << "\ts1 > s2:\t\t" << (s > s1) << std::endl;
+		std::cout << "\ts1 >= s2:\t\t" << (s >= s1) << std::endl;
 	}
 }

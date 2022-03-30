@@ -29,6 +29,7 @@ void print_param(ft::vector<T> &vec) {
 }
 
 void vector_test() {
+	std::cout << "\n<<<< VECTOR >>>>\n\n";
 	{
 		std::cout << "Constuctor:\n";
 		ft::vector<int> v1;
