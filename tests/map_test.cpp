@@ -55,14 +55,14 @@ template <typename Iterator>
 void	printContent(Iterator first, Iterator last)
 {
 	Iterator	it = first;
-	std::cout << "\t\tContent\t:  [(";
+	std::cout << "\t\tMap:\t\t\t\t{[";
 	for (; it != last; ++it)
 	{
 		if (it != first)
-			std::cout << "), (";
-		std::cout << (*it).first << " ; " << (*it).second;
+			std::cout << "] [";
+		std::cout << (*it).first << ", " << (*it).second;
 	}
-	std::cout << ")]\n";
+	std::cout << "]}\n";
 }
 
 typedef ft::pair<int, std::string> ispair;
@@ -445,7 +445,7 @@ void map_test() {
 	}
 	std::cout << "--------" << std::endl;
 	{
-		std::cout << "Swap:\n";
+		std::cout << "Swap(non-member function):\n";
 		int			iarr2[] = { 4, 7, 8 };
 		std::string	sarr2[] = { "Four", "Seven", "Eight" };
 		ispair		parr2[3];
