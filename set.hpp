@@ -115,7 +115,7 @@ namespace ft {
 		friend bool operator<(const set<K1, C1, A1>&, const set<K1, C1, A1>&);
 	};
 	// Non-member functions //
-	template<class Key, class Compare, class Alloc> // check
+	template<class Key, class Compare, class Alloc>
 	bool operator==(const set<Key,Compare,Alloc>& lhs, const set<Key,Compare,Alloc>& rhs)
 	{ return lhs._tree == rhs._tree; }
 

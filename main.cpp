@@ -1,15 +1,15 @@
 #include <iostream>
 #include <string>
 #include <deque>
-#if 1 //CREATE A REAL STL EXAMPLE
+#if STD //CREATE A REAL STL EXAMPLE
 	#include <map>
 	#include <stack>
 	#include <vector>
 	namespace ft = std;
 #else
-	#include <map.hpp>
-	#include <stack.hpp>
-	#include <vector.hpp>
+	#include "map.hpp"
+	#include "stack.hpp"
+	#include "vector.hpp"
 #endif
 
 #include <stdlib.h>
@@ -24,6 +24,12 @@ struct Buffer
 
 
 #define COUNT (MAX_RAM / (int)sizeof(Buffer))
+
+void time(clock_t start) {
+	clock_t end = clock();
+	double	avg = (((double)end - start) / ((double) CLOCKS_PER_SEC));
+	std::cout << "\nAverage time to complete the test: " << avg << " second(s)\n";
+}
 
 template<typename T>
 class MutantStack : public ft::stack<T>
@@ -54,6 +60,9 @@ int main(int argc, char** argv) {
 	}
 	const int seed = atoi(argv[1]);
 	srand(seed);
+	clock_t start;
+	start = clock();
+
 
 	ft::vector<std::string> vector_str;
 	ft::vector<int> vector_int;
@@ -112,5 +121,7 @@ int main(int argc, char** argv) {
 		std::cout << *it;
 	}
 	std::cout << std::endl;
+	time(start);
+
 	return (0);
 }

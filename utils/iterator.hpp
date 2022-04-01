@@ -224,5 +224,4 @@ namespace ft {
 			++len;
 		return len;
 	}
-
 }
